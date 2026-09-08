@@ -29,7 +29,8 @@
       "Louboutin",
       "Estee Lauder"
     ],
-    "logo": "photos/logo.jpg"
+    "logo": "photos/logo.jpg",
+    "founderBio": "Writer, artist and DJ. Founder of Elite Eye, based in Dallas."
   },
   "hero": {
     "eyebrow": "Private gift consulting",
@@ -167,7 +168,7 @@
     "heading": "The eye behind it",
     "body": [
       "This service is designed to make it easier to gift tasteful and beautiful items. Hand-picked by me, these are pieces I search the ends of the internet for — and would readily give to myself or to my own family.",
-      "[BIO PLACEHOLDER — two or three sentences from Rachel: background, how the eye was trained, why Dallas. Until this is written the paragraph is omitted from the site.]",
+      "I came to this from the other arts. I write, I paint, and I DJ, and they are all the same job in different clothes: read the room, then hand it the thing it did not know it wanted. A degree taught me how to research something properly and not stop at the first plausible answer. The decks taught me timing &mdash; that the right thing at the wrong moment is just noise.",
       "Elite Eye is deliberately small. I take a limited number of engagements so that every one of them gets an actual eye on it — mine."
     ]
   },
