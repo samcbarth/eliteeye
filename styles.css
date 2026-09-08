@@ -14,6 +14,11 @@
      small text on cream. */
   --brand: #17c8ce;
   --accent: #0e8f95;
+  --brand-wash: #e8f7f7;
+  /* Her boxes are iridescent, so the site borrows that as a gradient rather
+     than as a colour: pale enough to read as light on paper, not as neon. */
+  --iris: linear-gradient(100deg, #cfe9e6 0%, #dfe0f0 28%, #f0dfe6 52%, #f5e6cf 74%, #cfe9e6 100%);
+  --iris-strong: linear-gradient(100deg, #6fd6d8 0%, #9fb8e8 30%, #e0a9c4 55%, #e8c99a 78%, #6fd6d8 100%);
   --max: 1180px;
   --gutter: clamp(1.5rem, 5vw, 5rem);
   --serif: "Cormorant Garamond", "Didot", "Bodoni MT", "Times New Roman", serif;
@@ -885,4 +890,108 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
   .marquee-viewport { overflow-x: auto; }
   .marquee-track { animation: none; }
   .marquee-track img { transition: none; }
+}
+
+/* ---------- brand colour and iridescence ----------
+   Everything below is drawn from the two things she already owns: the turquoise
+   script logo and the holographic boxes in her photographs. No new images. */
+
+::selection { background: var(--brand-wash); color: var(--ink); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Rules become a thin iridescent seam instead of a flat grey line. */
+.rule {
+  height: 1px;
+  border: 0;
+  background: var(--iris);
+  opacity: 0.9;
+}
+
+/* Each eyebrow gets a short turquoise tick, so the label reads as hers. */
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.6rem;
+  height: 1px;
+  margin-right: 0.85rem;
+  vertical-align: 0.28em;
+  background: var(--accent);
+}
+
+.marquee-head .note { color: var(--accent); }
+
+/* Cards sweep an iridescent seam rather than a solid bar. */
+.service-card::after { background: var(--iris-strong); height: 3px; }
+
+.service-card .price-note,
+.process-step .num { color: var(--accent); }
+
+.process-step .num::after { background: var(--iris-strong); height: 2px; }
+
+/* The proof strip picks up a faint wash so it separates from the cream. */
+.proof {
+  background: linear-gradient(to bottom, var(--brand-wash), transparent 140%);
+}
+
+/* Gallery captions gain a hairline that fills with brand colour on hover. */
+.gallery-grid figure { position: relative; }
+
+.gallery-grid figcaption {
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--rule);
+  transition: border-color 0.5s ease, color 0.5s ease;
+}
+
+.gallery-grid figure:hover figcaption {
+  border-top-color: var(--brand);
+  color: var(--ink-soft);
+}
+
+/* The band line sits on an iridescent underline. */
+.band .band-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  width: min(14rem, 40%);
+  height: 2px;
+  transform: translateX(-50%);
+  background: var(--iris-strong);
+}
+
+/* Closing panel: iridescent top seam, and her eye motif as a watermark. */
+.closing {
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid transparent;
+  border-image: var(--iris-strong) 1;
+}
+
+.closing .wrap { position: relative; z-index: 1; }
+
+.closing .eye-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(46rem, 120%);
+  transform: translate(-50%, -50%);
+  opacity: 0.14;
+  pointer-events: none;
+  color: var(--brand);
+}
+
+/* Footer plate glows faintly, the way the logo does on her turquoise boxes. */
+.footer-logo {
+  position: relative;
+  box-shadow: 0 0 0 1px var(--ink), 0 12px 40px -18px rgba(23, 200, 206, 0.85);
+}
+
+.site-footer a:hover { color: var(--accent); }
+
+/* Booking buttons keep the ink fill, but the ghost button borrows the seam. */
+.btn--ghost { border-image: var(--iris-strong) 1; border-width: 1px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-grid figcaption { transition: none; }
 }

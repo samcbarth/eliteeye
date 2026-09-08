@@ -275,9 +275,30 @@ def paragraphs(items):
     return "\n".join(f"<p>{p}</p>" for p in items if not pending(p))
 
 
+# Her logo is a script wordmark over a lashed eye. This is that eye alone,
+# redrawn as paths so it can sit behind the closing panel at any size without
+# another image request.
+EYE_MARK = (
+    '<svg class="eye-mark" viewBox="0 0 600 260" fill="none" aria-hidden="true" '
+    'focusable="false" xmlns="http://www.w3.org/2000/svg">'
+    '<path d="M40 150 C150 40 450 40 560 150 C450 250 150 250 40 150 Z" '
+    'stroke="currentColor" stroke-width="3"/>'
+    '<circle cx="300" cy="150" r="54" stroke="currentColor" stroke-width="3"/>'
+    '<circle cx="300" cy="150" r="18" fill="currentColor"/>'
+    + "".join(
+        f'<path d="M{300 + dx} {150 - 62 - abs(dx) * 0.16} '
+        f'l{dx * 0.10:.1f} -{34 - abs(dx) * 0.05:.1f}" '
+        'stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
+        for dx in range(-230, 231, 46)
+    )
+    + "</svg>"
+)
+
+
 def cta_block():
     c = C["cta"]
     return f"""<section class="closing">
+  {EYE_MARK}
   <div class="wrap">
     <h2>{e(c['heading'])}</h2>
     <p class="lede">{e(c['body'])}</p>
