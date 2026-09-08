@@ -1,0 +1,204 @@
+{
+  "brand": {
+    "name": "Elite Eye",
+    "legalName": "Elite Eye Gifts",
+    "tagline": "Where designer meets sentiment and good taste",
+    "site": "https://eliteeyegifts.com",
+    "description": "Private gift consulting for Dallas' most discerning households. Luxury gifting, sourced and styled by a single trusted eye.",
+    "founder": "[FOUNDER_NAME]",
+    "founderPhoto": "photos/founder.jpg",
+    "founderPhotoAlt": "[FOUNDER_NAME], founder of Elite Eye",
+    "email": "[EMAIL]",
+    "instagram": "https://instagram.com/[IG_HANDLE]",
+    "instagramHandle": "@[IG_HANDLE]",
+    "meetingUrl": "[HUBSPOT_MEETINGS_LINK]",
+    "meetingCta": "Book a complimentary consultation",
+    "serviceArea": [
+      "Highland Park",
+      "University Park",
+      "Preston Hollow",
+      "Dallas",
+      "Fort Worth"
+    ],
+    "brandsMentioned": [
+      "Chanel",
+      "Dior",
+      "Yves Saint Laurent",
+      "Gucci",
+      "Louboutin"
+    ]
+  },
+
+  "hero": {
+    "eyebrow": "Private gift consulting",
+    "headline": "Where designer meets sentiment and good taste",
+    "subhead": "You know the gift should be extraordinary. You do not have forty hours to find it. I do that part — quietly, personally, and with an eye trained on the details most people miss.",
+    "primaryCta": "Book a complimentary consultation",
+    "secondaryCta": "See the work",
+    "image": "photos/hero.jpg",
+    "imageAlt": "A hand-assembled Elite Eye luxury gift presentation"
+  },
+
+  "proof": {
+    "line": "Chanel · Dior · Yves Saint Laurent · Gucci · Louboutin — and the small houses you have not heard of yet."
+  },
+
+  "problem": {
+    "heading": "The gift is never really about the gift",
+    "body": [
+      "It is about being seen. A gift that lands says <em>I paid attention.</em> A gift that misses says the opposite, loudly, and it is remembered.",
+      "I know how frustrating it is to tell someone exactly what you want and watch them miss the mark. And for the rest of us — we genuinely want to give something beautiful, but it is time-consuming, and the good things are never on the first page of results.",
+      "Elite Eye takes the searching off your plate. I find the pieces you would not otherwise find, and I present them so the moment of opening is as considered as the object itself."
+    ]
+  },
+
+  "services": [
+    {
+      "slug": "private-gift-consulting",
+      "title": "Private Gift Consulting",
+      "shortTitle": "Private consulting",
+      "audience": "Individuals",
+      "priceNote": "Complimentary intro call · engagements from $800",
+      "summary": "One conversation about the person, the occasion, and the relationship — then a curated proposal of pieces, sourced and presented for you.",
+      "detail": [
+        "We start with a call. Not about products — about the person receiving the gift. What they already own, what they would never buy for themselves, what they have quietly mentioned twice.",
+        "From there I source. I search well past the obvious retailers: limited editions, exclusive releases, small houses, and the occasional piece that takes a phone call to a person rather than a click on a site.",
+        "You receive a curated proposal with options at a defined budget. You choose. I handle acquisition, authentication, presentation, and discreet delivery."
+      ],
+      "includes": [
+        "Discovery call about the recipient and the occasion",
+        "Curated proposal, sourced to your budget",
+        "Authentication on every designer piece",
+        "Presentation and packaging designed to be opened, not unwrapped",
+        "Discreet delivery or hand-off coordination"
+      ]
+    },
+    {
+      "slug": "corporate-executive-gifting",
+      "title": "Corporate & Executive Gifting",
+      "shortTitle": "Corporate gifting",
+      "audience": "Firms, family offices, private practices",
+      "priceNote": "Program pricing by engagement",
+      "summary": "A gifting program for the clients and partners you cannot afford to send a branded tumbler.",
+      "detail": [
+        "At a certain level, a corporate gift is a positioning statement. It tells your best client what tier of relationship they are in — and a generic one tells them something you did not intend.",
+        "I build gifting programs for firms, family offices, and private practices: a defined tier structure, a sourcing calendar ahead of the holiday crush, and a record of who received what, so no one is sent the same thing twice.",
+        "Nothing is logo-stamped unless you ask. The point is that it does not look like it came from a catalog."
+      ],
+      "includes": [
+        "Tiered gift structure mapped to your relationship levels",
+        "Recipient intelligence, so the gift fits the person and not just the tier",
+        "Sourcing calendar set ahead of Q4 scarcity",
+        "Recipient log to prevent repeats year over year",
+        "Coordinated shipping and arrival timing"
+      ]
+    },
+    {
+      "slug": "weddings-and-milestones",
+      "title": "Weddings & Milestones",
+      "shortTitle": "Weddings & milestones",
+      "audience": "Couples, hosts, families",
+      "priceNote": "By engagement",
+      "summary": "Bridal party gifts, anniversary pieces, and milestone gifting handled as one cohesive collection rather than nine separate errands.",
+      "detail": [
+        "A wedding produces a dozen gifting decisions at exactly the moment you have the least attention to spend on them: the bridal party, the parents, the host, the planner, the couple themselves.",
+        "I treat them as one collection. Consistent in taste, individual to each person, and delivered on a schedule that does not depend on you remembering it.",
+        "The same applies to the milestones that follow — anniversaries, births, the birthdays that carry weight."
+      ],
+      "includes": [
+        "A single cohesive collection across every recipient",
+        "Individual personalization within a consistent aesthetic",
+        "Timeline managed to the event date",
+        "Presentation suitable for a room full of photographs",
+        "Coordination with your planner where one exists"
+      ]
+    },
+    {
+      "slug": "custom-luxury-gift-boxes",
+      "title": "The Elite Custom",
+      "shortTitle": "The Elite Custom",
+      "audience": "By request",
+      "priceNote": "From $800",
+      "summary": "A fully bespoke presentation built around one person. Designer pieces, assembled and styled, with at least one limited edition or exclusive item in every box.",
+      "detail": [
+        "The original Elite Eye service, and still the one people ask for by name.",
+        "Every box is built for a specific person rather than assembled from a standing inventory. Every designer item is authenticated or goes through an authentication process. Shipping packaging is deliberately discreet.",
+        "At least one limited edition or exclusive piece is guaranteed in every box — something the recipient could not have simply ordered themselves."
+      ],
+      "includes": [
+        "Fully bespoke to one recipient",
+        "Guaranteed limited edition or exclusive piece",
+        "All designer items authenticated",
+        "Styled presentation, photographed before it ships",
+        "Discreet outer packaging"
+      ]
+    }
+  ],
+
+  "process": [
+    {
+      "step": "One",
+      "title": "The call",
+      "body": "Twenty minutes, complimentary. We talk about the recipient, the occasion, the relationship, and the budget you are working within."
+    },
+    {
+      "step": "Two",
+      "title": "The search",
+      "body": "I source privately — limited editions, exclusive releases, and pieces that are not sitting in a search result. This is the part that would have cost you your weekend."
+    },
+    {
+      "step": "Three",
+      "title": "The proposal",
+      "body": "A curated set of options within your budget, with the reasoning behind each. You choose. Nothing is purchased until you do."
+    },
+    {
+      "step": "Four",
+      "title": "The presentation",
+      "body": "Acquisition, authentication, styling, and packaging. Delivered discreetly, or handed to you ready to give."
+    }
+  ],
+
+  "about": {
+    "heading": "The eye behind it",
+    "body": [
+      "This service is designed to make it easier to gift tasteful and beautiful items. Hand-picked by me, these are pieces I search the ends of the internet for — and would readily give to myself or to my own family.",
+      "[FOUNDER_BIO_PLACEHOLDER — two or three sentences: background, how the eye was trained, why Dallas, anything that earns trust with a Highland Park client.]",
+      "Elite Eye is deliberately small. I take a limited number of engagements so that every one of them gets an actual eye on it — mine."
+    ]
+  },
+
+  "faq": [
+    {
+      "q": "What does the consultation cost?",
+      "a": "The introductory call is complimentary. If we move forward, engagements are quoted based on scope; bespoke work generally begins at $800 plus the cost of the pieces themselves."
+    },
+    {
+      "q": "Do you work outside Dallas?",
+      "a": "Yes. Most clients are in Highland Park, University Park, Preston Hollow, and the surrounding area, but sourcing and delivery are not geographically limited."
+    },
+    {
+      "q": "How do you handle authenticity?",
+      "a": "Every designer item is either sourced through an authorized channel or put through an authentication process before it reaches you. This is non-negotiable."
+    },
+    {
+      "q": "How far ahead should I book?",
+      "a": "For the holidays, by early autumn — the best pieces are limited and they go. For an individual occasion, two to three weeks is comfortable. Shorter timelines are sometimes possible; ask."
+    },
+    {
+      "q": "Can you work within a set budget?",
+      "a": "Yes, and I prefer to. Tell me the number on the first call and every option you see will respect it."
+    },
+    {
+      "q": "Is the packaging discreet?",
+      "a": "Yes. The presentation inside is styled to be photographed; the shipping packaging outside gives nothing away."
+    }
+  ],
+
+  "cta": {
+    "heading": "Give something they could not have found themselves",
+    "body": "A short call is the whole commitment. Tell me who it is for and I will tell you what is possible.",
+    "button": "Book a complimentary consultation"
+  },
+
+  "gallery": []
+}
