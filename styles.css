@@ -853,7 +853,7 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
   display: flex;
   gap: 1.25rem;
   width: max-content;
-  animation: marquee 64s linear infinite;
+  animation: marquee 96s linear infinite;
 }
 
 .marquee:hover .marquee-track,

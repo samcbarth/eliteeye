@@ -8,10 +8,10 @@
     "founder": "Rachel",
     "founderPhoto": "photos/founder.jpg",
     "founderPhotoAlt": "Rachel, founder of Elite Eye",
-    "email": "[EMAIL]",
+    "email": "eliteeyegifts@gmail.com",
     "instagram": "https://instagram.com/eliteeyegifts",
     "instagramHandle": "@eliteeyegifts",
-    "meetingUrl": "[HUBSPOT_MEETINGS_LINK]",
+    "meetingUrl": "https://meetings.hubspot.com/sam-barth/elite-eye-consult",
     "meetingCta": "Book a complimentary consultation",
     "serviceArea": [
       "Highland Park",
@@ -266,16 +266,32 @@
         "alt": "A fragrance bottle seated in its presentation box"
       },
       {
-        "image": "photos/mood-pearls.jpg",
-        "alt": "A mother-of-pearl pendant and earrings on cream linen"
+        "image": "photos/mood-diamond-ring.jpg",
+        "alt": "A faceted rose gold band set with a single diamond"
       },
       {
         "image": "photos/mood-watch-leather.jpg",
         "alt": "A rose gold watch on an alligator strap in its case"
       },
       {
+        "image": "photos/mood-perfume-box.jpg",
+        "alt": "A gold fragrance bottle beside its embossed box in dappled light"
+      },
+      {
+        "image": "photos/mood-pearls.jpg",
+        "alt": "A mother-of-pearl pendant and earrings on cream linen"
+      },
+      {
         "image": "photos/mood-lv-flowers.jpg",
         "alt": "Louis Vuitton wrapping surrounded by white and blue flowers"
+      },
+      {
+        "image": "photos/mood-gold-necklaces.jpg",
+        "alt": "Fine gold chains with coloured gemstone pendants on cream"
+      },
+      {
+        "image": "photos/mood-gold-round-box.jpg",
+        "alt": "A small black and gold compact case in hard sunlight"
       },
       {
         "image": "photos/mood-champagne.jpg",

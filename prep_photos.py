@@ -43,6 +43,8 @@ STOCK = {
 MOOD = [
     "mood-perfume", "mood-lv-flowers", "mood-watch-box", "mood-watch-leather",
     "mood-champagne", "mood-leather-bag", "mood-pearls", "mood-pearl-necklaces",
+    "mood-diamond-ring", "mood-gold-necklaces", "mood-perfume-box",
+    "mood-gold-round-box",
 ]
 MOOD_BOX = (900, 900)
 

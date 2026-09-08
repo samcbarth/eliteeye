@@ -102,5 +102,37 @@
     "photographer_url": "https://www.pexels.com/@tinypearl-xoxo-2160572462",
     "url": "https://www.pexels.com/photo/elegant-display-of-freshwater-pearl-necklaces-36854158/",
     "alt": "Beautiful array of freshwater pearl necklaces displayed elegantly on a soft background."
+  },
+  {
+    "id": 29193426,
+    "file": "photos/pexels/mood-diamond-ring.jpg",
+    "photographer": "The Glorious  Studio",
+    "photographer_url": "https://www.pexels.com/@the-glorious-studio-3584518",
+    "url": "https://www.pexels.com/photo/elegant-diamond-ring-in-minimalist-setting-29193426/",
+    "alt": "Stunning minimalist diamond ring, ideal for fine jewelry enthusiasts and fashion lovers."
+  },
+  {
+    "id": 32382447,
+    "file": "photos/pexels/mood-gold-necklaces.jpg",
+    "photographer": "kjewelry accessories",
+    "photographer_url": "https://www.pexels.com/@kjewelry-accessories-2152762090",
+    "url": "https://www.pexels.com/photo/elegant-gold-necklaces-with-gemstone-pendants-32382447/",
+    "alt": "Stunning collection of gold necklaces featuring vibrant gemstone pendants for a luxurious touch."
+  },
+  {
+    "id": 12456260,
+    "file": "photos/pexels/mood-perfume-box.jpg",
+    "photographer": "Khulood Abdulghani",
+    "photographer_url": "https://www.pexels.com/@khulood-abdulghani-195928257",
+    "url": "https://www.pexels.com/photo/gold-and-black-labeled-perfume-bottle-12456260/",
+    "alt": "Stylish perfume bottle and box captured with sunlight shadows creating an artistic still life."
+  },
+  {
+    "id": 19117855,
+    "file": "photos/pexels/mood-gold-round-box.jpg",
+    "photographer": "Moni Rathnak",
+    "photographer_url": "https://www.pexels.com/@monirathnak",
+    "url": "https://www.pexels.com/photo/golden-box-on-table-19117855/",
+    "alt": "A golden round box sits on a white table with elegant light patterns, creating a chic and modern aesthetic."
   }
 ]
