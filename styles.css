@@ -812,3 +812,77 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
   .site-header, .closing, .nav-toggle { display: none; }
   body { background: #fff; }
 }
+
+/* ---------- mood marquee ----------
+   Licensed reference imagery, not client work. The track holds the list twice
+   so the loop is seamless; the animation shifts it by exactly half its width.
+   Hover pauses it, and reduced motion turns it into a normal scrollable row. */
+
+.marquee {
+  padding-block: clamp(3rem, 6vh, 5rem);
+  border-block: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.marquee-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.marquee-head .eyebrow { margin: 0; }
+
+.marquee-head .note {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.marquee-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: marquee 64s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
+
+.marquee-track figure {
+  margin: 0;
+  flex: 0 0 auto;
+  width: clamp(12rem, 20vw, 17rem);
+}
+
+.marquee-track img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--cream-deep);
+  filter: saturate(0.85);
+  transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.marquee-track figure:hover img { filter: saturate(1); transform: scale(1.04); }
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-viewport { overflow-x: auto; }
+  .marquee-track { animation: none; }
+  .marquee-track img { transition: none; }
+}

@@ -236,6 +236,32 @@ def cta_block():
 </section>"""
 
 
+def marquee_block():
+    """Licensed reference imagery. Deliberately not the work gallery: the list is
+    labelled as reference so nothing here reads as a record of her own work."""
+    mood = C.get("mood") or {}
+    items = mood.get("items") or []
+    if not items:
+        return ""
+    # The track is rendered twice so the CSS loop can be seamless.
+    tiles = "".join(
+        f'<figure><img src="{e(i["image"])}" alt="{e(i["alt"])}" loading="lazy" '
+        f'width="900" height="900"></figure>'
+        for i in items
+    )
+    return f"""<section class="marquee">
+  <div class="wrap">
+    <div class="marquee-head">
+      <p class="eyebrow">{e(mood.get('eyebrow', ''))}</p>
+      <p class="note">{e(mood.get('note', ''))}</p>
+    </div>
+  </div>
+  <div class="marquee-viewport">
+    <div class="marquee-track" aria-hidden="false">{tiles}{tiles}</div>
+  </div>
+</section>"""
+
+
 def gallery_block():
     works = C.get("gallery") or []
     if not works:
@@ -356,6 +382,8 @@ def build_index():
   </div>
 </section>
 <hr class="rule">
+
+{marquee_block()}
 
 <section id="services" class="reveal">
   <div class="wrap">

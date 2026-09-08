@@ -6,7 +6,7 @@
     "site": "https://samcbarth.github.io/eliteeye",
     "description": "Private gift consulting for Dallas' most discerning households. Luxury gifting, sourced and styled by a single trusted eye.",
     "founder": "Rachel",
-    "founderPhoto": null,
+    "founderPhoto": "photos/founder.jpg",
     "founderPhotoAlt": "Rachel, founder of Elite Eye",
     "email": "[EMAIL]",
     "instagram": "https://instagram.com/eliteeyegifts",
@@ -256,5 +256,43 @@
     "image": "photos/band-sheer.jpg",
     "alt": "Folds of sheer ivory silk",
     "line": "The right gift is not the expensive one. It is the one that could only have been meant for them."
+  },
+  "mood": {
+    "eyebrow": "The register",
+    "note": "Reference imagery",
+    "items": [
+      {
+        "image": "photos/mood-perfume.jpg",
+        "alt": "A fragrance bottle seated in its presentation box"
+      },
+      {
+        "image": "photos/mood-pearls.jpg",
+        "alt": "A mother-of-pearl pendant and earrings on cream linen"
+      },
+      {
+        "image": "photos/mood-watch-leather.jpg",
+        "alt": "A rose gold watch on an alligator strap in its case"
+      },
+      {
+        "image": "photos/mood-lv-flowers.jpg",
+        "alt": "Louis Vuitton wrapping surrounded by white and blue flowers"
+      },
+      {
+        "image": "photos/mood-champagne.jpg",
+        "alt": "Champagne flutes and an ice bucket on a black tray"
+      },
+      {
+        "image": "photos/mood-pearl-necklaces.jpg",
+        "alt": "Freshwater pearl necklaces laid out together"
+      },
+      {
+        "image": "photos/mood-watch-box.jpg",
+        "alt": "A chronograph watch in a black leather travel case"
+      },
+      {
+        "image": "photos/mood-leather-bag.jpg",
+        "alt": "A black leather bag photographed close in low light"
+      }
+    ]
   }
 }

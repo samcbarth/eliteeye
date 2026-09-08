@@ -2,7 +2,7 @@
   {
     "id": 16155549,
     "file": "photos/pexels/stock-writing-hand.jpg",
-    "photographer": "C\u00c3\u00a9line  |",
+    "photographer": "CÃ©line  |",
     "photographer_url": "https://www.pexels.com/@celine-3776818",
     "url": "https://www.pexels.com/photo/a-person-writing-in-a-notebook-with-a-gold-ring-16155549/",
     "alt": "Artistic scene of a woman's hand with jewelry, writing in a notebook with Paris postcards and tea."
@@ -10,7 +10,7 @@
   {
     "id": 38340930,
     "file": "photos/pexels/stock-bride-ribbons.jpg",
-    "photographer": "k\u00c3\u00bcbra zehra",
+    "photographer": "kÃ¼bra zehra",
     "photographer_url": "https://www.pexels.com/@kubrarkan",
     "url": "https://www.pexels.com/photo/elegant-bride-s-hand-with-lace-glove-and-ribbon-38340930/",
     "alt": "Close-up of a bride's hand in lace glove holding ribbons, showcasing elegance and detail."
@@ -38,5 +38,69 @@
     "photographer_url": "https://www.pexels.com/@andrei-ciubotariu-434389090",
     "url": "https://www.pexels.com/photo/close-up-of-black-envelopes-with-wax-stamps-17262454/",
     "alt": "Close-up of stylish black envelopes featuring vintage wax seals, perfect for luxury invitations."
+  },
+  {
+    "id": 11482458,
+    "file": "photos/pexels/mood-perfume.jpg",
+    "photographer": "Khulood Abdulghani",
+    "photographer_url": "https://www.pexels.com/@khulood-abdulghani-195928257",
+    "url": "https://www.pexels.com/photo/perfume-bottle-in-elegant-box-11482458/",
+    "alt": "A luxurious still life of an elegant perfume bottle in a decorative box."
+  },
+  {
+    "id": 4475780,
+    "file": "photos/pexels/mood-lv-flowers.jpg",
+    "photographer": "Anne R",
+    "photographer_url": "https://www.pexels.com/@anne-r-168988",
+    "url": "https://www.pexels.com/photo/a-louis-vuitton-box-near-the-flowers-4475780/",
+    "alt": "Elegant Louis Vuitton branding surrounded by delicate white and purple flowers, exuding luxury."
+  },
+  {
+    "id": 30077330,
+    "file": "photos/pexels/mood-watch-box.jpg",
+    "photographer": "Heidi Daniëls",
+    "photographer_url": "https://www.pexels.com/@heidi-daniels-2308315",
+    "url": "https://www.pexels.com/photo/luxury-breitling-watch-in-elegant-presentation-box-30077330/",
+    "alt": "High-end Breitling chronograph watch displayed in a sleek leather case, embodying luxury and precision."
+  },
+  {
+    "id": 19766306,
+    "file": "photos/pexels/mood-watch-leather.jpg",
+    "photographer": "Quang Viet Nguyen",
+    "photographer_url": "https://www.pexels.com/@quang-viet-nguyen-107013384",
+    "url": "https://www.pexels.com/photo/rolex-cellini-dual-time-watch-in-a-box-19766306/",
+    "alt": "High-end luxury watch with black leather strap displayed in its stylish box."
+  },
+  {
+    "id": 29463830,
+    "file": "photos/pexels/mood-champagne.jpg",
+    "photographer": "Marcelo Verfe",
+    "photographer_url": "https://www.pexels.com/@marceloverfe",
+    "url": "https://www.pexels.com/photo/elegant-still-life-with-ice-bucket-and-glasses-29463830/",
+    "alt": "Sophisticated still life featuring an elegant ice bucket and champagne glasses on a rustic table."
+  },
+  {
+    "id": 26736144,
+    "file": "photos/pexels/mood-leather-bag.jpg",
+    "photographer": "José Martin Segura Benites",
+    "photographer_url": "https://www.pexels.com/@jose-martin-segura-benites-1422456152",
+    "url": "https://www.pexels.com/photo/leather-bag-in-black-and-white-26736144/",
+    "alt": "Close-up of a stylish black leather bag suspended in a modern, minimalist environment."
+  },
+  {
+    "id": 34444209,
+    "file": "photos/pexels/mood-pearls.jpg",
+    "photographer": "Laura Oliveira",
+    "photographer_url": "https://www.pexels.com/@lauraoliveira",
+    "url": "https://www.pexels.com/photo/elegant-necklace-and-earrings-set-on-white-fabric-34444209/",
+    "alt": "A stylish set of mother-of-pearl necklace and earrings displayed on white fabric."
+  },
+  {
+    "id": 36854158,
+    "file": "photos/pexels/mood-pearl-necklaces.jpg",
+    "photographer": "TinyPearl xoxo",
+    "photographer_url": "https://www.pexels.com/@tinypearl-xoxo-2160572462",
+    "url": "https://www.pexels.com/photo/elegant-display-of-freshwater-pearl-necklaces-36854158/",
+    "alt": "Beautiful array of freshwater pearl necklaces displayed elegantly on a soft background."
   }
 ]

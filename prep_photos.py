@@ -38,6 +38,14 @@ STOCK = {
     "stock-sheer-fabric.jpg": ("band-sheer.jpg", (2400, 1000)),
 }
 
+# Mood strip. Reference imagery only - these are licensed stock and are kept
+# well away from the work gallery, which is entirely her own photography.
+MOOD = [
+    "mood-perfume", "mood-lv-flowers", "mood-watch-box", "mood-watch-leather",
+    "mood-champagne", "mood-leather-bag", "mood-pearls", "mood-pearl-necklaces",
+]
+MOOD_BOX = (900, 900)
+
 HERO_BOX = (2000, 1200)   # wide crop for the hero
 FULL_BOX = (1400, 1400)   # longest edge for gallery originals
 THUMB = 800               # square thumbnails
@@ -65,6 +73,24 @@ for src_name, out_name in MAP.items():
         save(ImageOps.fit(im, (THUMB, THUMB), Image.LANCZOS, centering=(0.5, 0.45)), THUMBS / out_name)
     print(f"{out_name:34s} <- {src_name}")
 
+# Founder portrait. The only usable frame is from a 2020 graduation set, so it
+# is cropped to head and shoulders and pushed to a warm monochrome: the green
+# gown fought the palette, and mono reads editorial rather than commencement.
+# Replace PORTRAIT_SRC with a real headshot when one exists and drop the tint.
+PORTRAIT_SRC = "photos/rachel/instagram_rachelscott_2020-12-15_05.jpg"
+PORTRAIT_CROP = (150, 15, 590, 565)
+
+portrait_src = ROOT / PORTRAIT_SRC
+if portrait_src.exists():
+    from PIL import ImageEnhance
+    im = ImageOps.exif_transpose(Image.open(portrait_src))
+    im = im.crop(PORTRAIT_CROP).resize((800, 1000), Image.LANCZOS).convert("RGB")
+    grey = ImageEnhance.Contrast(ImageOps.grayscale(im)).enhance(1.08)
+    duo = ImageOps.colorize(grey, black="#1b1714", white="#f4efe7", mid="#9c9086")
+    save(ImageEnhance.Sharpness(duo).enhance(1.15), OUT / "founder.jpg", 92)
+    print(f"{'founder.jpg':34s} <- {pathlib.Path(PORTRAIT_SRC).name} (cropped, warm mono)")
+
+
 for src_name, (out_name, box) in STOCK.items():
     src = ROOT / "photos/pexels" / src_name
     if not src.exists():
@@ -73,3 +99,12 @@ for src_name, (out_name, box) in STOCK.items():
     im = ImageOps.exif_transpose(Image.open(src))
     save(ImageOps.fit(im, box, Image.LANCZOS, centering=(0.5, 0.5)), OUT / out_name, 86)
     print(f"{out_name:40s} <- {src_name}")
+
+for name in MOOD:
+    src = ROOT / "photos/pexels" / f"{name}.jpg"
+    if not src.exists():
+        print(f"MISSING {name}")
+        continue
+    im = ImageOps.exif_transpose(Image.open(src))
+    save(ImageOps.fit(im, MOOD_BOX, Image.LANCZOS, centering=(0.5, 0.5)), OUT / f"{name}.jpg", 84)
+    print(f"{name + '.jpg':40s} <- pexels/{name}.jpg")
