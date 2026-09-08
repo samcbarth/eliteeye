@@ -31,11 +31,11 @@ MAP = {
 # photography carries the credibility; these are texture. Credits in
 # photos/pexels/CREDITS.json.
 STOCK = {
-    "stock-writing-hand.jpg": ("service-private-gift-consulting.jpg", (1600, 900)),
-    "stock-wax-seals.jpg": ("service-corporate-executive-gifting.jpg", (1600, 900)),
-    "stock-bride-ribbons.jpg": ("service-weddings-and-milestones.jpg", (1600, 900)),
-    "stock-ribbons-flatlay.jpg": ("service-custom-luxury-gift-boxes.jpg", (1600, 900)),
-    "stock-sheer-fabric.jpg": ("band-sheer.jpg", (2400, 1000)),
+    "stock-writing-hand.jpg": ("service-private-gift-consulting.jpg", (1400, 788)),
+    "stock-wax-seals.jpg": ("service-corporate-executive-gifting.jpg", (1400, 788)),
+    "stock-bride-ribbons.jpg": ("service-weddings-and-milestones.jpg", (1400, 788)),
+    "stock-ribbons-flatlay.jpg": ("service-custom-luxury-gift-boxes.jpg", (1400, 788)),
+    "stock-sheer-fabric.jpg": ("band-sheer.jpg", (2000, 840)),
 }
 
 # Mood strip. Reference imagery only - these are licensed stock and are kept
@@ -49,13 +49,19 @@ MOOD = [
 # Tiles render at roughly 270px wide, so 600px covers a 2x screen.
 MOOD_BOX = (600, 600)
 
-HERO_BOX = (2000, 1200)   # wide crop for the hero
-FULL_BOX = (1400, 1400)   # longest edge for gallery originals
-THUMB = 800               # square thumbnails
+HERO_BOX = (1800, 1013)   # wide crop for the hero
+FULL_BOX = (1200, 1200)   # longest edge for gallery originals
+THUMB = 620               # square thumbnails
 
 
 def save(im, path, quality=86):
-    im.convert("RGB").save(path, "JPEG", quality=quality, optimize=True, progressive=True)
+    """Write a progressive JPEG plus a WebP sibling.
+
+    build.py emits every image as a <picture> that prefers the WebP and falls
+    back to the JPEG, so both files must exist for each name."""
+    rgb = im.convert("RGB")
+    rgb.save(path, "JPEG", quality=quality, optimize=True, progressive=True)
+    rgb.save(path.with_suffix(".webp"), "WEBP", quality=max(quality - 8, 58), method=6)
 
 
 for src_name, out_name in MAP.items():
@@ -66,14 +72,14 @@ for src_name, out_name in MAP.items():
     im = ImageOps.exif_transpose(Image.open(src))
 
     if out_name == "hero.jpg":
-        save(ImageOps.fit(im, HERO_BOX, Image.LANCZOS, centering=(0.5, 0.5)), OUT / out_name, 88)
+        save(ImageOps.fit(im, HERO_BOX, Image.LANCZOS, centering=(0.5, 0.5)), OUT / out_name, 80)
     elif out_name == "logo.jpg":
-        save(ImageOps.contain(im, (900, 900), Image.LANCZOS), OUT / out_name, 90)
+        save(ImageOps.contain(im, (560, 560), Image.LANCZOS), OUT / out_name, 86)
     else:
         full = im.copy()
         full.thumbnail(FULL_BOX, Image.LANCZOS)
-        save(full, OUT / out_name)
-        save(ImageOps.fit(im, (THUMB, THUMB), Image.LANCZOS, centering=(0.5, 0.45)), THUMBS / out_name)
+        save(full, OUT / out_name, 80)
+        save(ImageOps.fit(im, (THUMB, THUMB), Image.LANCZOS, centering=(0.5, 0.45)), THUMBS / out_name, 78)
     print(f"{out_name:34s} <- {src_name}")
 
 # Founder portrait. The only usable frame is from a 2020 graduation set, so it
@@ -90,7 +96,7 @@ if portrait_src.exists():
     im = im.crop(PORTRAIT_CROP).resize((800, 1000), Image.LANCZOS).convert("RGB")
     grey = ImageEnhance.Contrast(ImageOps.grayscale(im)).enhance(1.08)
     duo = ImageOps.colorize(grey, black="#1b1714", white="#f4efe7", mid="#9c9086")
-    save(ImageEnhance.Sharpness(duo).enhance(1.15), OUT / "founder.jpg", 92)
+    save(ImageEnhance.Sharpness(duo).enhance(1.15), OUT / "founder.jpg", 84)
     print(f"{'founder.jpg':34s} <- {pathlib.Path(PORTRAIT_SRC).name} (cropped, warm mono)")
 
 
@@ -100,7 +106,7 @@ for src_name, (out_name, box) in STOCK.items():
         print(f"MISSING {src_name}")
         continue
     im = ImageOps.exif_transpose(Image.open(src))
-    save(ImageOps.fit(im, box, Image.LANCZOS, centering=(0.5, 0.5)), OUT / out_name, 86)
+    save(ImageOps.fit(im, box, Image.LANCZOS, centering=(0.5, 0.5)), OUT / out_name, 79)
     print(f"{out_name:40s} <- {src_name}")
 
 for name in MOOD:
@@ -109,5 +115,5 @@ for name in MOOD:
         print(f"MISSING {name}")
         continue
     im = ImageOps.exif_transpose(Image.open(src))
-    save(ImageOps.fit(im, MOOD_BOX, Image.LANCZOS, centering=(0.5, 0.5)), OUT / f"{name}.jpg", 78)
+    save(ImageOps.fit(im, MOOD_BOX, Image.LANCZOS, centering=(0.5, 0.5)), OUT / f"{name}.jpg", 76)
     print(f"{name + '.jpg':40s} <- pexels/{name}.jpg")

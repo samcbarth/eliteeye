@@ -47,9 +47,37 @@ def e(s):
     return html.escape(str(s), quote=True)
 
 
+
+def picture(src, alt, w, h, *, up="", cls="", lazy=True, attrs=""):
+    """<picture> preferring the WebP sibling, falling back to the JPEG.
+
+    prep_photos.py writes both files for every name, so the .webp always exists.
+    Everything below the fold is lazy and async-decoded; anything above it passes
+    lazy=False so it is not deferred."""
+    webp = src.rsplit(".", 1)[0] + ".webp"
+    loading = 'loading="lazy" ' if lazy else ""
+    klass = f'class="{e(cls)}" ' if cls else ""
+    extra = f" {attrs}" if attrs else ""
+    return (
+        f'<picture>'
+        f'<source srcset="{up}{e(webp)}" type="image/webp">'
+        f'<img src="{up}{e(src)}" alt="{e(alt)}" width="{w}" height="{h}" '
+        f'{klass}{loading}decoding="async"{extra}>'
+        f'</picture>'
+    )
+
+
 def head(title, description, canonical, depth=0, schema=None):
     """<head> plus the opening body/header. depth = how many dirs deep the page sits."""
     up = "../" * depth
+    # Only the index shows the hero, so only the index preloads it.
+    hero_preload = ""
+    if depth == 0:
+        hero_webp = C["hero"]["image"].rsplit(".", 1)[0] + ".webp"
+        hero_preload = (
+            f'<link rel="preload" as="image" href="{e(hero_webp)}" '
+            f'type="image/webp" fetchpriority="high">\n'
+        )
     blocks = ""
     for obj in schema or []:
         blocks += (
@@ -72,9 +100,14 @@ def head(title, description, canonical, depth=0, schema=None):
 <meta property="og:description" content="{e(description)}">
 <meta property="og:url" content="{e(canonical)}">
 <meta property="og:image" content="{e(BASE)}/{e(C['hero']['image'])}">
+<meta property="og:image:width" content="1800">
+<meta property="og:image:height" content="1013">
+<meta property="og:image:alt" content="{e(C['hero']['imageAlt'])}">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{e(BASE)}/{e(C['hero']['image'])}">
 {FONTS}
-<link rel="stylesheet" href="{up}styles.css">{blocks}
+{hero_preload}<link rel="stylesheet" href="{up}styles.css">{blocks}
 </head>
 <body>
 <header class="site-header">
@@ -107,7 +140,7 @@ def foot(depth=0):
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <span class="footer-logo"><img src="{up}{e(BRAND.get('logo', 'photos/logo.jpg'))}" alt="{e(NAME)} logo" width="190" height="190" loading="lazy"></span>
+        <span class="footer-logo">{picture(BRAND.get('logo', 'photos/logo.jpg'), NAME + ' logo', 560, 560, up=up)}</span>
         <p style="margin:0;max-width:32ch">{e(BRAND['tagline'])}</p>
       </div>
       <div>
@@ -248,8 +281,10 @@ def marquee_block():
         # Not lazy: the track is moved with a transform, so the browser never
         # decides these have entered the viewport and tiles scroll in blank.
         # fetchpriority keeps them behind the hero in the queue instead.
-        f'<figure><img src="{e(i["image"])}" alt="{e(i["alt"])}" decoding="async" '
-        f'fetchpriority="low" width="600" height="600"></figure>'
+        f'<figure><picture>'
+        f'<source data-srcset="{e(i["image"].rsplit(".", 1)[0])}.webp" type="image/webp">'
+        f'<img data-src="{e(i["image"])}" alt="{e(i["alt"])}" width="600" height="600" '
+        f'decoding="async" fetchpriority="low"></picture></figure>'
         for i in items
     )
     return f"""<section class="marquee">
@@ -276,7 +311,7 @@ def gallery_block():
         cards = "\n".join(
             f"""      <figure>
         <a href="{e(w['image'])}" target="_blank" rel="noopener">
-          <img src="{e(w.get('thumb', w['image']))}" alt="{e(w.get('alt', w.get('title', '')))}" loading="lazy" width="800" height="800">
+          {picture(w.get('thumb', w['image']), w.get('alt', w.get('title', '')), 620, 620)}
           <span class="overlay">View full size</span>
         </a>
         <figcaption>{e(w.get('title', ''))}</figcaption>
@@ -336,7 +371,7 @@ def build_index():
     if BRAND.get("founderPhoto"):
         about_layout = f"""    <div class="about-grid">
       <figure class="about-portrait" style="margin:0">
-        <img src="{e(BRAND['founderPhoto'])}" alt="{e(BRAND['founderPhotoAlt'])}" width="800" height="1000">
+        {picture(BRAND['founderPhoto'], BRAND['founderPhotoAlt'], 800, 1000)}
         <figcaption>{e(BRAND['founder'])}, founder</figcaption>
       </figure>
       <div>
@@ -366,7 +401,7 @@ def build_index():
       <a class="btn btn--ghost" href="#services">{e(hero['secondaryCta'])}</a>
     </div>
     <figure class="hero-figure" style="margin-inline:0">
-      <img src="{e(hero['image'])}" alt="{e(hero['imageAlt'])}" width="1600" height="900" data-parallax="34">
+      {picture(hero['image'], hero['imageAlt'], 1800, 1013, lazy=False, attrs='data-parallax="34" fetchpriority="high"')}
     </figure>
   </div>
 </section>
@@ -413,7 +448,7 @@ def build_index():
 </section>
 
 <div class="band">
-  <img src="{e(C['band']['image'])}" alt="{e(C['band']['alt'])}" loading="lazy" width="2400" height="1000" data-parallax="60">
+  {picture(C['band']['image'], C['band']['alt'], 2000, 840, attrs='data-parallax="60"')}
   <p class="band-line">{e(C['band']['line'])}</p>
 </div>
 
@@ -459,9 +494,10 @@ def build_service(s):
     other = [x for x in SERVICES if x["slug"] != s["slug"]]
     # Each service page opens on its own drifting image where one is set.
     lead = (
-        '<figure class="detail-figure"><img src="../' + e(s["image"])
-        + '" alt="' + e(s.get("imageAlt", s["title"]))
-        + '" width="1600" height="900" data-parallax="46"></figure>'
+        '<figure class="detail-figure">'
+        + picture(s["image"], s.get("imageAlt", s["title"]), 1400, 788,
+                  up="../", lazy=False, attrs='data-parallax="46"')
+        + '</figure>'
         if s.get("image") else '<hr class="rule">'
     )
     more = "\n".join(
@@ -577,13 +613,25 @@ def build_sitemap():
     urls = [(BASE + "/", "1.0"), (BASE + "/services/", "0.8")]
     urls += [(f"{BASE}/services/{s['slug']}.html", "0.7") for s in SERVICES]
     today = date.today().isoformat()
-    entries = "\n".join(
-        f"  <url><loc>{e(u)}</loc><lastmod>{today}</lastmod><priority>{p}</priority></url>"
-        for u, p in urls
+    # The home page declares her own photography for image search. Licensed
+    # stock is deliberately left out of the sitemap.
+    images = "".join(
+        f"<image:image><image:loc>{BASE}/{e(w['image'])}</image:loc>"
+        f"<image:title>{e(w.get('title', ''))}</image:title></image:image>"
+        for w in (C.get("gallery") or [])
     )
+    rows = []
+    for u, pr in urls:
+        extra = images if u == BASE + "/" else ""
+        rows.append(
+            f"  <url><loc>{e(u)}</loc><lastmod>{today}</lastmod>"
+            f"<priority>{pr}</priority>{extra}</url>"
+        )
+    entries = "\n".join(rows)
     (ROOT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
         f"{entries}\n</urlset>\n",
         encoding="utf-8",
     )

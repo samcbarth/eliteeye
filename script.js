@@ -124,3 +124,37 @@ if (drifters.length && !REDUCED) {
   };
   requestAnimationFrame(poll);
 }
+
+
+// Marquee tiles carry data-src rather than src: the track is moved with a
+// transform, so native lazy loading never fires for them and they scroll in
+// blank. Instead the whole strip loads once when it approaches the viewport,
+// which keeps them off the critical path without the blank-tile problem.
+const marquee = document.querySelector('.marquee');
+if (marquee) {
+  const loadTiles = () => {
+    // Set the <source> before the <img>, so the browser picks the WebP.
+    marquee.querySelectorAll('source[data-srcset]').forEach((source) => {
+      source.srcset = source.dataset.srcset;
+      delete source.dataset.srcset;
+    });
+    marquee.querySelectorAll('img[data-src]').forEach((img) => {
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+    });
+  };
+
+  if ('IntersectionObserver' in window) {
+    const mo = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        loadTiles();
+        mo.disconnect();
+      }
+    }, { rootMargin: '600px 0px' });
+    mo.observe(marquee);
+    // Same failsafe as the reveals: never leave the strip empty.
+    setTimeout(loadTiles, 3000);
+  } else {
+    loadTiles();
+  }
+}
