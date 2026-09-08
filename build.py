@@ -245,8 +245,11 @@ def marquee_block():
         return ""
     # The track is rendered twice so the CSS loop can be seamless.
     tiles = "".join(
-        f'<figure><img src="{e(i["image"])}" alt="{e(i["alt"])}" loading="lazy" '
-        f'width="900" height="900"></figure>'
+        # Not lazy: the track is moved with a transform, so the browser never
+        # decides these have entered the viewport and tiles scroll in blank.
+        # fetchpriority keeps them behind the hero in the queue instead.
+        f'<figure><img src="{e(i["image"])}" alt="{e(i["alt"])}" decoding="async" '
+        f'fetchpriority="low" width="600" height="600"></figure>'
         for i in items
     )
     return f"""<section class="marquee">

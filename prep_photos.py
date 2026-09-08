@@ -46,7 +46,8 @@ MOOD = [
     "mood-diamond-ring", "mood-gold-necklaces", "mood-perfume-box",
     "mood-gold-round-box",
 ]
-MOOD_BOX = (900, 900)
+# Tiles render at roughly 270px wide, so 600px covers a 2x screen.
+MOOD_BOX = (600, 600)
 
 HERO_BOX = (2000, 1200)   # wide crop for the hero
 FULL_BOX = (1400, 1400)   # longest edge for gallery originals
@@ -108,5 +109,5 @@ for name in MOOD:
         print(f"MISSING {name}")
         continue
     im = ImageOps.exif_transpose(Image.open(src))
-    save(ImageOps.fit(im, MOOD_BOX, Image.LANCZOS, centering=(0.5, 0.5)), OUT / f"{name}.jpg", 84)
+    save(ImageOps.fit(im, MOOD_BOX, Image.LANCZOS, centering=(0.5, 0.5)), OUT / f"{name}.jpg", 78)
     print(f"{name + '.jpg':40s} <- pexels/{name}.jpg")
