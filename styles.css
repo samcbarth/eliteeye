@@ -9,7 +9,11 @@
   --ink-soft: #4a4442;
   --ink-faint: #8a827c;
   --rule: #ddd5ca;
-  --accent: #7d6a52;
+  /* Her existing logo is turquoise script on black. --brand is that colour as-is,
+     for the mark itself; --accent is a darkened version that stays legible as
+     small text on cream. */
+  --brand: #17c8ce;
+  --accent: #0e8f95;
   --max: 1180px;
   --gutter: clamp(1.5rem, 5vw, 5rem);
   --serif: "Cormorant Garamond", "Didot", "Bodoni MT", "Times New Roman", serif;
@@ -309,6 +313,16 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
 
 .gallery-grid figure { margin: 0; }
 
+.gallery-grid a {
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.gallery-grid a img { transition: transform 0.6s ease; }
+
+.gallery-grid a:hover img { transform: scale(1.03); }
+
 .gallery-grid img {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -410,6 +424,17 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
   justify-content: space-between;
   align-items: flex-start;
 }
+
+/* The logo is turquoise on black, so it sits on its own black plate rather than
+   floating on the cream. */
+.footer-logo {
+  background: var(--ink);
+  padding: 1.25rem 1.5rem;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+
+.footer-logo img { width: 190px; height: auto; }
 
 .site-footer a { text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }

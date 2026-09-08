@@ -5,9 +5,9 @@
     "tagline": "Where designer meets sentiment and good taste",
     "site": "https://samcbarth.github.io/eliteeye",
     "description": "Private gift consulting for Dallas' most discerning households. Luxury gifting, sourced and styled by a single trusted eye.",
-    "founder": "[FOUNDER_NAME]",
-    "founderPhoto": "photos/founder.jpg",
-    "founderPhotoAlt": "[FOUNDER_NAME], founder of Elite Eye",
+    "founder": "Rachel",
+    "founderPhoto": null,
+    "founderPhotoAlt": "Rachel, founder of Elite Eye",
     "email": "[EMAIL]",
     "instagram": "https://instagram.com/eliteeyegifts",
     "instagramHandle": "@eliteeyegifts",
@@ -25,8 +25,11 @@
       "Dior",
       "Yves Saint Laurent",
       "Gucci",
-      "Louboutin"
-    ]
+      "Louis Vuitton",
+      "Louboutin",
+      "Estee Lauder"
+    ],
+    "logo": "photos/logo.jpg"
   },
   "hero": {
     "eyebrow": "Private gift consulting",
@@ -35,10 +38,10 @@
     "primaryCta": "Book a complimentary consultation",
     "secondaryCta": "See the work",
     "image": "photos/hero.jpg",
-    "imageAlt": "A hand-assembled Elite Eye luxury gift presentation"
+    "imageAlt": "Iridescent Gucci boxes and gift bag from an Elite Eye presentation"
   },
   "proof": {
-    "line": "Chanel · Dior · Yves Saint Laurent · Gucci · Louboutin — and the small houses you have not heard of yet."
+    "line": "Chanel · Dior · Yves Saint Laurent · Gucci · Louis Vuitton · Louboutin — and the small houses you have not heard of yet."
   },
   "problem": {
     "heading": "The gift is never really about the gift",
@@ -156,7 +159,7 @@
     "heading": "The eye behind it",
     "body": [
       "This service is designed to make it easier to gift tasteful and beautiful items. Hand-picked by me, these are pieces I search the ends of the internet for — and would readily give to myself or to my own family.",
-      "[FOUNDER_BIO_PLACEHOLDER — two or three sentences: background, how the eye was trained, why Dallas, anything that earns trust with a Highland Park client.]",
+      "[BIO PLACEHOLDER — two or three sentences from Rachel: background, how the eye was trained, why Dallas. Until this is written the paragraph is omitted from the site.]",
       "Elite Eye is deliberately small. I take a limited number of engagements so that every one of them gets an actual eye on it — mine."
     ]
   },
@@ -191,5 +194,54 @@
     "body": "A short call is the whole commitment. Tell me who it is for and I will tell you what is possible.",
     "button": "Book a complimentary consultation"
   },
-  "gallery": []
+  "gallery": [
+    {
+      "image": "photos/work-chanel-personalized.jpg",
+      "thumb": "photos/thumbs/work-chanel-personalized.jpg",
+      "title": "A Chanel presentation, named for the recipient",
+      "alt": "Chanel No.5 perfume, lipstick set, compacts and a silk eye mask arranged with a personalised gift bag and an iridescent Elite Eye box"
+    },
+    {
+      "image": "photos/work-ysl-paris.jpg",
+      "thumb": "photos/thumbs/work-ysl-paris.jpg",
+      "title": "Paris je t'aime — Yves Saint Laurent, Chanel, Gucci",
+      "alt": "A Yves Saint Laurent pink vinyl record with Estee Lauder, Chanel and Gucci pieces staged around iridescent boxes"
+    },
+    {
+      "image": "photos/work-casino-night.jpg",
+      "thumb": "photos/thumbs/work-casino-night.jpg",
+      "title": "Casino night, built around one recipient",
+      "alt": "A card-themed luxury gift spread with Estee Lauder, Chanel, Louis Vuitton, Gucci and a Dior necklace"
+    },
+    {
+      "image": "photos/work-relaxation-set.jpg",
+      "thumb": "photos/thumbs/work-relaxation-set.jpg",
+      "title": "A relaxation set, head to toe",
+      "alt": "Chanel No.5, Chanel beauty, a silk robe and eye mask with a Juicy Couture velvet pillow"
+    },
+    {
+      "image": "photos/work-dior-necklace.jpg",
+      "thumb": "photos/thumbs/work-dior-necklace.jpg",
+      "title": "Dior, in its box",
+      "alt": "A Dior charm necklace with cut-out hearts, presented in its navy box"
+    },
+    {
+      "image": "photos/work-louis-vuitton-cards.jpg",
+      "thumb": "photos/thumbs/work-louis-vuitton-cards.jpg",
+      "title": "Louis Vuitton playing cards",
+      "alt": "A sealed Louis Vuitton Damier Graphite playing card set in a black presentation box"
+    },
+    {
+      "image": "photos/work-gucci-night.jpg",
+      "thumb": "photos/thumbs/work-gucci-night.jpg",
+      "title": "Gucci, wrapped",
+      "alt": "Iridescent Gucci boxes and a gift bag lit in blue and violet"
+    },
+    {
+      "image": "photos/work-elite-eye-box.jpg",
+      "thumb": "photos/thumbs/work-elite-eye-box.jpg",
+      "title": "The Elite Eye box",
+      "alt": "The Elite Eye logo in script with a holographic eye, printed on a turquoise gift box"
+    }
+  ]
 }

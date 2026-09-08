@@ -25,6 +25,16 @@ BASE = BRAND["site"].rstrip("/")
 NAME = BRAND["name"]
 SERVICES = C["services"]
 
+def pending(value):
+    """A content.json value still written as [SOMETHING] hasn't been supplied yet."""
+    return isinstance(value, str) and value.startswith("[") and value.endswith("]")
+
+
+# Until every placeholder is filled the site stays out of the search index, and
+# CTAs fall back to Instagram rather than pointing at a dead string.
+PLACEHOLDERS = [k for k in ("email", "meetingUrl") if pending(BRAND.get(k))]
+BOOK_URL = BRAND["meetingUrl"] if not pending(BRAND["meetingUrl"]) else BRAND["instagram"]
+
 FONTS = (
     '<link rel="preconnect" href="https://fonts.googleapis.com">'
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -54,6 +64,7 @@ def head(title, description, canonical, depth=0, schema=None):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
+{'<meta name="robots" content="noindex">' if PLACEHOLDERS else ''}
 <link rel="canonical" href="{e(canonical)}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{e(NAME)}">
@@ -75,7 +86,7 @@ def head(title, description, canonical, depth=0, schema=None):
       <a href="{up}index.html#process">Process</a>
       <a href="{up}index.html#about">About</a>
       <a href="{up}index.html#faq">FAQ</a>
-      <a class="btn" href="{e(BRAND['meetingUrl'])}">Book a call</a>
+      <a class="btn" href="{e(BOOK_URL)}">Book a call</a>
     </nav>
   </div>
 </header>
@@ -96,7 +107,7 @@ def foot(depth=0):
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <p class="wordmark" style="margin:0 0 .75rem">{e(NAME)}</p>
+        <span class="footer-logo"><img src="{up}{e(BRAND.get('logo', 'photos/logo.jpg'))}" alt="{e(NAME)} logo" width="190" height="190" loading="lazy"></span>
         <p style="margin:0;max-width:32ch">{e(BRAND['tagline'])}</p>
       </div>
       <div>
@@ -108,9 +119,9 @@ def foot(depth=0):
       <div>
         <p class="eyebrow" style="margin-bottom:.75rem">Contact</p>
         <p style="margin:0;line-height:2">
-          <a href="mailto:{e(BRAND['email'])}">{e(BRAND['email'])}</a><br>
+          {f'<a href="mailto:{e(BRAND["email"])}">{e(BRAND["email"])}</a><br>' if not pending(BRAND["email"]) else ''}
           <a href="{e(BRAND['instagram'])}" rel="noopener">{e(BRAND['instagramHandle'])}</a><br>
-          <a href="{e(BRAND['meetingUrl'])}">Book a consultation</a>
+          <a href="{e(BOOK_URL)}">Book a consultation</a>
         </p>
       </div>
     </div>
@@ -129,7 +140,7 @@ def foot(depth=0):
 # ---------------------------------------------------------------- schema.org
 
 def org_schema():
-    return {
+    data = {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": NAME,
@@ -137,7 +148,6 @@ def org_schema():
         "url": BASE + "/",
         "description": BRAND["description"],
         "image": f"{BASE}/{C['hero']['image']}",
-        "email": BRAND["email"],
         "founder": {"@type": "Person", "name": BRAND["founder"]},
         "sameAs": [BRAND["instagram"]],
         "areaServed": [{"@type": "Place", "name": a} for a in BRAND["serviceArea"]],
@@ -159,6 +169,9 @@ def org_schema():
             ],
         },
     }
+    if not pending(BRAND["email"]):
+        data["email"] = BRAND["email"]
+    return data
 
 
 def faq_schema():
@@ -205,8 +218,9 @@ def crumbs(s):
 # ---------------------------------------------------------------- partials
 
 def paragraphs(items):
-    """content.json allows inline <em>, so these are intentionally not escaped."""
-    return "\n".join(f"<p>{p}</p>" for p in items)
+    """content.json allows inline <em>, so these are intentionally not escaped.
+    Paragraphs still written as [SOMETHING] are omitted rather than published."""
+    return "\n".join(f"<p>{p}</p>" for p in items if not pending(p))
 
 
 def cta_block():
@@ -216,7 +230,7 @@ def cta_block():
     <h2>{e(c['heading'])}</h2>
     <p class="lede">{e(c['body'])}</p>
     <div class="btn-row">
-      <a class="btn" href="{e(BRAND['meetingUrl'])}">{e(c['button'])}</a>
+      <a class="btn" href="{e(BOOK_URL)}">{e(c['button'])}</a>
     </div>
   </div>
 </section>"""
@@ -232,7 +246,9 @@ def gallery_block():
     else:
         cards = "\n".join(
             f"""      <figure>
-        <img src="{e(w['image'])}" alt="{e(w.get('alt', w.get('title', '')))}" loading="lazy" width="800" height="800">
+        <a href="{e(w['image'])}" target="_blank" rel="noopener">
+          <img src="{e(w.get('thumb', w['image']))}" alt="{e(w.get('alt', w.get('title', '')))}" loading="lazy" width="800" height="800">
+        </a>
         <figcaption>{e(w.get('title', ''))}</figcaption>
       </figure>"""
             for w in works
@@ -284,13 +300,38 @@ def build_index():
         for f in C["faq"]
     )
 
+    # No real portrait yet, so the about section runs full width rather than
+    # showing a placeholder box. Set brand.founderPhoto to bring it back.
+    if BRAND.get("founderPhoto"):
+        about_layout = f"""    <div class="about-grid">
+      <figure class="about-portrait" style="margin:0">
+        <img src="{e(BRAND['founderPhoto'])}" alt="{e(BRAND['founderPhotoAlt'])}" width="800" height="1000">
+        <figcaption>{e(BRAND['founder'])}, founder</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">About</p>
+        <h2>{e(about['heading'])}</h2>
+        <div class="lede" style="margin-top:2rem">
+          {paragraphs(about['body'])}
+        </div>
+      </div>
+    </div>"""
+    else:
+        about_layout = f"""    <div class="narrow">
+      <p class="eyebrow">About</p>
+      <h2>{e(about['heading'])}</h2>
+      <div class="lede" style="margin-top:2rem">
+        {paragraphs(about['body'])}
+      </div>
+    </div>"""
+
     body = f"""<section class="hero">
   <div class="wrap">
     <p class="eyebrow">{e(hero['eyebrow'])}</p>
     <h1>{e(hero['headline'])}</h1>
     <p class="lede">{e(hero['subhead'])}</p>
     <div class="btn-row">
-      <a class="btn" href="{e(BRAND['meetingUrl'])}">{e(hero['primaryCta'])}</a>
+      <a class="btn" href="{e(BOOK_URL)}">{e(hero['primaryCta'])}</a>
       <a class="btn btn--ghost" href="#services">{e(hero['secondaryCta'])}</a>
     </div>
     <figure class="hero-figure" style="margin-inline:0">
@@ -340,19 +381,7 @@ def build_index():
 
 <section id="about" class="reveal">
   <div class="wrap">
-    <div class="about-grid">
-      <figure class="about-portrait" style="margin:0">
-        <img src="{e(BRAND['founderPhoto'])}" alt="{e(BRAND['founderPhotoAlt'])}" width="800" height="1000">
-        <figcaption>{e(BRAND['founder'])}, founder</figcaption>
-      </figure>
-      <div>
-        <p class="eyebrow">About</p>
-        <h2>{e(about['heading'])}</h2>
-        <div class="lede" style="margin-top:2rem">
-          {paragraphs(about['body'])}
-        </div>
-      </div>
-    </div>
+{about_layout}
   </div>
 </section>
 <hr class="rule">
@@ -406,7 +435,7 @@ def build_service(s):
     <h1>{e(s['title'])}</h1>
     <p class="lede" style="max-width:50ch">{e(s['summary'])}</p>
     <div class="btn-row">
-      <a class="btn" href="{e(BRAND['meetingUrl'])}">{e(BRAND['meetingCta'])}</a>
+      <a class="btn" href="{e(BOOK_URL)}">{e(BRAND['meetingCta'])}</a>
     </div>
   </div>
 </section>
