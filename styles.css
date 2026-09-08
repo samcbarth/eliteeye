@@ -569,13 +569,19 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
 
 .closing .lede { color: color-mix(in srgb, var(--cream) 72%, transparent); margin-inline: auto; max-width: 46ch; }
 
+/* On the dark panel the wipe inverts: the fill is cream and the label is ink,
+   otherwise the ink-coloured ::before paints over ink-coloured text and the
+   button reads as an empty box. */
 .closing .btn {
-  background: var(--cream);
+  background: transparent;
   color: var(--ink);
   border-color: var(--cream);
 }
 
-.closing .btn:hover { background: transparent; color: var(--cream); }
+.closing .btn::before { background: var(--cream); }
+
+.closing .btn:hover,
+.closing .btn:focus-visible { color: var(--cream); }
 
 .closing .btn-row { justify-content: center; }
 
