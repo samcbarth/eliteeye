@@ -3,14 +3,14 @@
     "name": "Elite Eye",
     "legalName": "Elite Eye Gifts",
     "tagline": "Where designer meets sentiment and good taste",
-    "site": "https://eliteeyegifts.com",
+    "site": "https://samcbarth.github.io/eliteeye",
     "description": "Private gift consulting for Dallas' most discerning households. Luxury gifting, sourced and styled by a single trusted eye.",
     "founder": "[FOUNDER_NAME]",
     "founderPhoto": "photos/founder.jpg",
     "founderPhotoAlt": "[FOUNDER_NAME], founder of Elite Eye",
     "email": "[EMAIL]",
-    "instagram": "https://instagram.com/[IG_HANDLE]",
-    "instagramHandle": "@[IG_HANDLE]",
+    "instagram": "https://instagram.com/eliteeyegifts",
+    "instagramHandle": "@eliteeyegifts",
     "meetingUrl": "[HUBSPOT_MEETINGS_LINK]",
     "meetingCta": "Book a complimentary consultation",
     "serviceArea": [
@@ -28,7 +28,6 @@
       "Louboutin"
     ]
   },
-
   "hero": {
     "eyebrow": "Private gift consulting",
     "headline": "Where designer meets sentiment and good taste",
@@ -38,11 +37,9 @@
     "image": "photos/hero.jpg",
     "imageAlt": "A hand-assembled Elite Eye luxury gift presentation"
   },
-
   "proof": {
     "line": "Chanel · Dior · Yves Saint Laurent · Gucci · Louboutin — and the small houses you have not heard of yet."
   },
-
   "problem": {
     "heading": "The gift is never really about the gift",
     "body": [
@@ -51,7 +48,6 @@
       "Elite Eye takes the searching off your plate. I find the pieces you would not otherwise find, and I present them so the moment of opening is as considered as the object itself."
     ]
   },
-
   "services": [
     {
       "slug": "private-gift-consulting",
@@ -134,7 +130,6 @@
       ]
     }
   ],
-
   "process": [
     {
       "step": "One",
@@ -157,7 +152,6 @@
       "body": "Acquisition, authentication, styling, and packaging. Delivered discreetly, or handed to you ready to give."
     }
   ],
-
   "about": {
     "heading": "The eye behind it",
     "body": [
@@ -166,7 +160,6 @@
       "Elite Eye is deliberately small. I take a limited number of engagements so that every one of them gets an actual eye on it — mine."
     ]
   },
-
   "faq": [
     {
       "q": "What does the consultation cost?",
@@ -193,12 +186,10 @@
       "a": "Yes. The presentation inside is styled to be photographed; the shipping packaging outside gives nothing away."
     }
   ],
-
   "cta": {
     "heading": "Give something they could not have found themselves",
     "body": "A short call is the whole commitment. Tell me who it is for and I will tell you what is possible.",
     "button": "Book a complimentary consultation"
   },
-
   "gallery": []
 }
