@@ -12,6 +12,7 @@ Re-run after any edit to content.json:  python build.py
 
 No dependencies. Stdlib only.
 """
+import hashlib
 import html
 import json
 import pathlib
@@ -45,6 +46,18 @@ FONTS = (
 
 def e(s):
     return html.escape(str(s), quote=True)
+
+
+def asset(name):
+    """Append a short content hash so a deploy never serves stale CSS or JS.
+
+    GitHub Pages caches assets aggressively; without this a returning visitor can
+    run last week's script against this week's markup."""
+    path = ROOT / name
+    if not path.exists():
+        return name
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()[:8]
+    return f"{name}?v={digest}"
 
 
 
@@ -107,7 +120,7 @@ def head(title, description, canonical, depth=0, schema=None):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{e(BASE)}/{e(C['hero']['image'])}">
 {FONTS}
-{hero_preload}<link rel="stylesheet" href="{up}styles.css">{blocks}
+{hero_preload}<link rel="stylesheet" href="{up}{asset('styles.css')}">{blocks}
 </head>
 <body>
 <header class="site-header">
@@ -164,7 +177,7 @@ def foot(depth=0):
     </div>
   </div>
 </footer>
-<script src="{up}script.js"></script>
+<script src="{up}{asset('script.js')}"></script>
 </body>
 </html>
 """
