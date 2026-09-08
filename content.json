@@ -70,7 +70,9 @@
         "Authentication on every designer piece",
         "Presentation and packaging designed to be opened, not unwrapped",
         "Discreet delivery or hand-off coordination"
-      ]
+      ],
+      "image": "photos/service-private-gift-consulting.jpg",
+      "imageAlt": "A jewelled hand writing a list beside gold jewellery and postcards"
     },
     {
       "slug": "corporate-executive-gifting",
@@ -90,7 +92,9 @@
         "Sourcing calendar set ahead of Q4 scarcity",
         "Recipient log to prevent repeats year over year",
         "Coordinated shipping and arrival timing"
-      ]
+      ],
+      "image": "photos/service-corporate-executive-gifting.jpg",
+      "imageAlt": "Black envelopes closed with gold wax seals"
     },
     {
       "slug": "weddings-and-milestones",
@@ -110,7 +114,9 @@
         "Timeline managed to the event date",
         "Presentation suitable for a room full of photographs",
         "Coordination with your planner where one exists"
-      ]
+      ],
+      "image": "photos/service-weddings-and-milestones.jpg",
+      "imageAlt": "A bride's lace-gloved hand holding ribbons and a pearl bow"
     },
     {
       "slug": "custom-luxury-gift-boxes",
@@ -130,7 +136,9 @@
         "All designer items authenticated",
         "Styled presentation, photographed before it ships",
         "Discreet outer packaging"
-      ]
+      ],
+      "image": "photos/service-custom-luxury-gift-boxes.jpg",
+      "imageAlt": "Silk ribbons in cream and tan with a wax-sealed tag"
     }
   ],
   "process": [
@@ -243,5 +251,10 @@
       "title": "The Elite Eye box",
       "alt": "The Elite Eye logo in script with a holographic eye, printed on a turquoise gift box"
     }
-  ]
+  ],
+  "band": {
+    "image": "photos/band-sheer.jpg",
+    "alt": "Folds of sheer ivory silk",
+    "line": "The right gift is not the expensive one. It is the one that could only have been meant for them."
+  }
 }

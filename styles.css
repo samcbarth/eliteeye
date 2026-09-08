@@ -117,21 +117,45 @@ p { margin: 0 0 1.4em; }
 }
 
 .nav a {
+  position: relative;
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ink-soft);
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
+}
+
+.nav a:not(.btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .nav a:hover { color: var(--ink); }
+
+.nav a:not(.btn):hover::after,
+.nav a:not(.btn):focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.wordmark { transition: letter-spacing 0.5s cubic-bezier(0.65, 0, 0.35, 1); }
+.site-header .wordmark:hover { letter-spacing: 0.26em; }
 
 .nav-toggle { display: none; }
 
 /* ---------- buttons ---------- */
 
 .btn {
+  position: relative;
   display: inline-block;
   font-family: var(--sans);
   font-size: 0.76rem;
@@ -140,21 +164,52 @@ p { margin: 0 0 1.4em; }
   text-decoration: none;
   padding: 1.15rem 2.25rem;
   border: 1px solid var(--ink);
-  background: var(--ink);
+  background: transparent;
   color: var(--cream);
-  transition: background 0.25s ease, color 0.25s ease;
   cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.35s ease, letter-spacing 0.35s ease, border-color 0.35s ease;
 }
 
-.btn:hover { background: transparent; color: var(--ink); }
+/* The fill is a pseudo-element so it can wipe rather than crossfade. */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink);
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.btn:hover, .btn:focus-visible {
+  color: var(--ink);
+  letter-spacing: 0.26em;
+}
+
+.btn:hover::before, .btn:focus-visible::before {
+  transform: scaleX(0);
+  transform-origin: right center;
+}
 
 .btn--ghost {
-  background: transparent;
   color: var(--ink);
   border-color: var(--rule);
 }
 
-.btn--ghost:hover { border-color: var(--ink); background: transparent; }
+.btn--ghost::before { background: var(--ink); transform: scaleX(0); transform-origin: right center; }
+
+.btn--ghost:hover, .btn--ghost:focus-visible {
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.btn--ghost:hover::before, .btn--ghost:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
 
 .btn-row {
   display: flex;
@@ -219,15 +274,61 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
 }
 
 .service-card {
+  position: relative;
   background: var(--cream);
   padding: clamp(2rem, 3.5vw, 3rem);
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  transition: background 0.3s ease;
+  overflow: hidden;
+  isolation: isolate;
+  transition: background 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.service-card:hover { background: var(--cream-deep); }
+/* A hairline sweeps across the top edge on hover. */
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+  background: var(--cream-deep);
+  transform: translateY(-6px);
+}
+
+.service-card:hover::after,
+.service-card:focus-visible::after { transform: scaleX(1); }
+
+.service-card .go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.service-card:hover .go,
+.service-card:focus-visible .go { opacity: 1; transform: none; }
+
+.service-card .go span {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.service-card:hover .go span { transform: translateX(0.4rem); }
 
 .service-card .audience {
   font-size: 0.7rem;
@@ -263,7 +364,12 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
   gap: clamp(2.5rem, 4vw, 4rem);
 }
 
+.process-step { position: relative; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+
+.process-step:hover { transform: translateY(-5px); }
+
 .process-step .num {
+  position: relative;
   font-family: var(--serif);
   font-size: 0.85rem;
   letter-spacing: 0.3em;
@@ -274,6 +380,22 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--rule);
 }
+
+/* The rule under each number fills in with the accent on hover. */
+.process-step .num::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.process-step:hover .num::after { transform: scaleX(1); }
 
 .process-step h3 { margin-bottom: 0.85rem; }
 
@@ -314,14 +436,43 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
 .gallery-grid figure { margin: 0; }
 
 .gallery-grid a {
+  position: relative;
   display: block;
   text-decoration: none;
   overflow: hidden;
+  background: var(--ink);
 }
 
-.gallery-grid a img { transition: transform 0.6s ease; }
+.gallery-grid a img {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+}
 
-.gallery-grid a:hover img { transform: scale(1.03); }
+.gallery-grid a:hover img,
+.gallery-grid a:focus-visible img { transform: scale(1.06); opacity: 0.55; }
+
+/* The caption lives over the image on hover, and stays in the flow below on
+   touch devices where hover never fires. */
+.gallery-grid .overlay {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.5rem 1.25rem 1.25rem;
+  color: var(--cream);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(to top, rgba(20, 17, 15, 0.85), transparent);
+  transform: translateY(0.75rem);
+  opacity: 0;
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-grid a:hover .overlay,
+.gallery-grid a:focus-visible .overlay { opacity: 1; transform: none; }
+
+@media (hover: none) {
+  .gallery-grid a:hover img { transform: none; opacity: 1; }
+  .gallery-grid .overlay { display: none; }
+}
 
 .gallery-grid img {
   width: 100%;
@@ -378,13 +529,28 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
 
 .faq-item summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
+.faq-item summary:hover { color: var(--accent); }
+
+/* details cannot transition height, so the answer is a grid row that goes
+   from 0fr to 1fr. Works without measuring anything in JS. */
 .faq-answer {
-  padding: 0 3rem 1.75rem 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  padding-right: 3rem;
   color: var(--ink-soft);
   max-width: 68ch;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.faq-answer p { margin: 0; }
+.faq-item[open] .faq-answer { grid-template-rows: 1fr; }
+
+.faq-answer > div { overflow: hidden; }
+
+.faq-answer p { margin: 0; padding-bottom: 1.75rem; }
+
+.faq-item summary::after { transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), color 0.3s ease; }
+
+.faq-item[open] summary::after { transform: translateY(-50%) rotate(180deg); }
 
 /* ---------- closing cta ---------- */
 
@@ -501,17 +667,108 @@ section { padding-block: clamp(5rem, 11vh, 9rem); }
 
 /* ---------- reveal ---------- */
 
-.reveal {
+.js-motion .reveal {
   opacity: 0;
-  transform: translateY(1.25rem);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(2rem);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.reveal.is-visible { opacity: 1; transform: none; }
+.js-motion .reveal.is-visible { opacity: 1; transform: none; }
+
+/* Children of a staggered container come in one after another. --i is set in JS. */
+.js-motion .stagger > * {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+.js-motion .stagger.is-visible > * { opacity: 1; transform: none; }
+
+/* Hero words rise individually on load. */
+.rise { display: inline-block; overflow: hidden; vertical-align: bottom; }
+
+.js-motion .rise > span {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: rise-in 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--w, 0) * 70ms + 120ms);
+}
+
+@keyframes rise-in { to { transform: none; } }
+
+/* Full-bleed image band that drifts as the page scrolls. --shift is set in JS. */
+.band {
+  position: relative;
+  height: clamp(20rem, 42vh, 30rem);
+  overflow: hidden;
+  background: var(--cream-deep);
+}
+
+.band img {
+  position: absolute;
+  inset: -12% 0 auto;
+  width: 100%;
+  height: 124%;
+  object-fit: cover;
+  transform: translate3d(0, var(--shift, 0px), 0);
+  will-change: transform;
+}
+
+.band .band-line {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-inline: var(--gutter);
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.2vw, 2.75rem);
+  line-height: 1.25;
+  color: var(--ink);
+  text-shadow: 0 1px 30px rgba(246, 243, 238, 0.9);
+}
+
+.hero-figure img { transform: translate3d(0, var(--shift, 0px), 0) scale(1.06); will-change: transform; }
+
+/* Detail pages get the same treatment on their lead image. */
+.detail-figure {
+  margin: 0;
+  overflow: hidden;
+  height: clamp(16rem, 34vh, 26rem);
+}
+
+.detail-figure img {
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  transform: translate3d(0, var(--shift, 0px), 0);
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+
+  .reveal,
+  .stagger > * { opacity: 1; transform: none; transition: none; }
+
+  .rise > span { transform: none; animation: none; }
+
+  .band img,
+  .hero-figure img,
+  .detail-figure img { transform: none; }
+
+  .btn::before,
+  .service-card,
+  .service-card::after,
+  .process-step,
+  .gallery-grid a img,
+  .gallery-grid .overlay,
+  .nav a::after,
+  .faq-answer,
+  .wordmark { transition: none; }
+
+  .service-card:hover,
+  .process-step:hover { transform: none; }
 }
 
 /* ---------- responsive ---------- */

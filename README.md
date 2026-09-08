@@ -52,6 +52,37 @@ It writes the hero crop, gallery images and square thumbnails into `photos/`
 and `photos/thumbs/`. Add a source file plus a line in that script's `MAP` to
 publish another one.
 
+## Stock photography
+
+`photos/pexels/` holds licensed stock from Pexels used for section atmosphere
+only - her own photography carries the credibility, these are texture. Sources,
+photographers and links are in `photos/pexels/CREDITS.json`. Pexels does not
+require attribution; the file exists so the origin of every image is traceable.
+
+`prep_photos.py` derives the service lead images and the parallax band from
+them via its `STOCK` map.
+
+## Motion
+
+Hover and scroll motion live in `styles.css` and `script.js`:
+
+- buttons wipe their fill left-to-right, nav links grow an underline
+- service cards lift, sweep a hairline across the top and slide in an arrow
+- gallery tiles zoom under a caption overlay
+- process steps lift and fill their rule with the accent
+- the headline rises word by word on load
+- the hero, the service lead images and the silk band drift against the scroll
+- sections and grids fade in, grid children staggered 90ms apart
+
+Two rules govern all of it:
+
+1. **Content is never hidden by CSS unless JS is running.** The hiding rules are
+   scoped to `.js-motion`, a class `script.js` sets on `<html>`. A script error,
+   a blocked file or an observer that never fires costs the animation, never the
+   content. A 2.2s failsafe reveals everything regardless.
+2. **`prefers-reduced-motion: reduce` disables all of it** - no parallax, no
+   reveal, no hover transitions.
+
 ## Placeholder handling
 
 Any `content.json` string still written as `[SOMETHING]` counts as unresolved.

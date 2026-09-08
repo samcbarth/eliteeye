@@ -248,12 +248,13 @@ def gallery_block():
             f"""      <figure>
         <a href="{e(w['image'])}" target="_blank" rel="noopener">
           <img src="{e(w.get('thumb', w['image']))}" alt="{e(w.get('alt', w.get('title', '')))}" loading="lazy" width="800" height="800">
+          <span class="overlay">View full size</span>
         </a>
         <figcaption>{e(w.get('title', ''))}</figcaption>
       </figure>"""
             for w in works
         )
-        inner = f'<div class="gallery-grid">\n{cards}\n    </div>'
+        inner = f'<div class="gallery-grid stagger">\n{cards}\n    </div>'
     return f"""<section id="work" class="reveal">
   <div class="wrap">
     <div class="section-head narrow">
@@ -279,6 +280,7 @@ def build_index():
       <h3>{e(s['title'])}</h3>
       <p>{e(s['summary'])}</p>
       <p class="price-note">{e(s['priceNote'])}</p>
+      <span class="go">Read more <span aria-hidden="true">&rarr;</span></span>
     </a>"""
         for s in SERVICES
     )
@@ -295,7 +297,7 @@ def build_index():
     faqs = "\n".join(
         f"""      <details class="faq-item">
         <summary>{e(f['q'])}</summary>
-        <div class="faq-answer"><p>{e(f['a'])}</p></div>
+        <div class="faq-answer"><div><p>{e(f['a'])}</p></div></div>
       </details>"""
         for f in C["faq"]
     )
@@ -328,14 +330,14 @@ def build_index():
     body = f"""<section class="hero">
   <div class="wrap">
     <p class="eyebrow">{e(hero['eyebrow'])}</p>
-    <h1>{e(hero['headline'])}</h1>
+    <h1 data-rise>{e(hero['headline'])}</h1>
     <p class="lede">{e(hero['subhead'])}</p>
     <div class="btn-row">
       <a class="btn" href="{e(BOOK_URL)}">{e(hero['primaryCta'])}</a>
       <a class="btn btn--ghost" href="#services">{e(hero['secondaryCta'])}</a>
     </div>
     <figure class="hero-figure" style="margin-inline:0">
-      <img src="{e(hero['image'])}" alt="{e(hero['imageAlt'])}" width="1600" height="900">
+      <img src="{e(hero['image'])}" alt="{e(hero['imageAlt'])}" width="1600" height="900" data-parallax="34">
     </figure>
   </div>
 </section>
@@ -361,7 +363,7 @@ def build_index():
       <p class="eyebrow">Services</p>
       <h2>Four ways to work together</h2>
     </div>
-    <div class="services-grid">
+    <div class="services-grid stagger">
 {cards}
     </div>
   </div>
@@ -373,11 +375,16 @@ def build_index():
       <p class="eyebrow">How it works</p>
       <h2>Four steps, and only one of them is yours</h2>
     </div>
-    <div class="process-grid">
+    <div class="process-grid stagger">
 {steps}
     </div>
   </div>
 </section>
+
+<div class="band">
+  <img src="{e(C['band']['image'])}" alt="{e(C['band']['alt'])}" loading="lazy" width="2400" height="1000" data-parallax="60">
+  <p class="band-line">{e(C['band']['line'])}</p>
+</div>
 
 <section id="about" class="reveal">
   <div class="wrap">
@@ -419,6 +426,13 @@ def build_index():
 
 def build_service(s):
     other = [x for x in SERVICES if x["slug"] != s["slug"]]
+    # Each service page opens on its own drifting image where one is set.
+    lead = (
+        '<figure class="detail-figure"><img src="../' + e(s["image"])
+        + '" alt="' + e(s.get("imageAlt", s["title"]))
+        + '" width="1600" height="900" data-parallax="46"></figure>'
+        if s.get("image") else '<hr class="rule">'
+    )
     more = "\n".join(
         f'      <a class="service-card" href="{e(x["slug"])}.html">'
         f'<span class="audience">{e(x["audience"])}</span>'
@@ -439,7 +453,8 @@ def build_service(s):
     </div>
   </div>
 </section>
-<hr class="rule">
+
+{lead}
 
 <section>
   <div class="wrap">
@@ -464,7 +479,7 @@ def build_service(s):
       <p class="eyebrow">Also available</p>
       <h2>Other ways to work together</h2>
     </div>
-    <div class="services-grid">
+    <div class="services-grid stagger">
 {more}
     </div>
   </div>
@@ -506,7 +521,7 @@ def build_service_index():
 </section>
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="services-grid">
+    <div class="services-grid stagger">
 {cards}
     </div>
   </div>
